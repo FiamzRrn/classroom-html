@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Akademik</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="ui.css">
+</head>
+<body class="dark" style="background-color: var(--bg-color);">
+    <div id="bg-image"></div>
+    <div id="cursor-glow"></div>
+
+    <div class="fixed-tr">
+        <button onclick="toggleTemaIndex()" class="btn-theme shadow-sm">
+            <svg id="sun-icon-idx" class="hidden" style="color:#eab308;" fill="currentColor" viewBox="0 0 20 20"> <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"></path></svg>
+            <svg id="moon-icon-idx" style="color:#4b5563;" fill="currentColor" viewBox="0 0 20 20"> <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        </button>
+    </div>
+    
+    <div class="min-vh-100 d-flex align-items-center justify-content-center position-relative">
+        <div class="glass-panel text-center p-5 shadow-lg rounded-5" style="max-width: 500px; width: 90%; z-index: 10;">
+            <h1 class="title-main display-5 fw-bold mt-0">Sistem Jadwal Kelas</h1>
+            <p class="text-secondary mb-5" style="line-height: 1.6;">
+                Platform manajemen jadwal ruang kelas buat mahasiswa TI. Gampang, cepat, dan anti bentrok.
+            </p>
+            <div class="d-grid gap-3">
+                <button onclick="window.location.href='login.html'" class="btn btn-primary btn-lg rounded-4 border-0 py-3 fw-bold" style="background: linear-gradient(to right, #2563eb, #3b82f6);">Masuk ke Dashboard</button>
+                <button onclick="window.location.href='register.html'" class="btn btn-outline-light btn-lg rounded-4 py-3 fw-bold" style="background: var(--glass-bg); color: var(--text-main); border-color: var(--glass-border) !important;">Daftar Akun Baru</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        const savedTheme = localStorage.getItem('themeTI') || 'dark';
+        if (savedTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            document.getElementById('sun-icon-idx').style.display = isDark ? 'none' : 'block';
+            document.getElementById('moon-icon-idx').style.display = isDark ? 'block' : 'none';
+        });
+
+        function toggleTemaIndex() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('themeTI', isDark ? 'dark' : 'light');
+            document.getElementById('sun-icon-idx').style.display = isDark ? 'none' : 'block';
+            document.getElementById('moon-icon-idx').style.display = isDark ? 'block' : 'none';
+        }
+
+        const glow = document.getElementById('cursor-glow');
+        let idleTimer;
+        
+        window.addEventListener('mousemove', (e) => {
+            if(glow) glow.classList.remove('cursor-idle');
+            requestAnimationFrame(() => { 
+                if(glow) glow.style.left = e.clientX + 'px'; 
+                if(glow) glow.style.top = e.clientY + 'px'; 
+            });
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => { if(glow) glow.classList.add('cursor-idle'); }, 2000);
+        });
+    </script>
+</body>
+</html>
