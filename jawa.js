@@ -1,4 +1,4 @@
-const API_URL = "http://backend-fikri.ct.ws/api.php";
+const API_URL = "https://backend-fikri.ct.ws//api.php";
 
 let dataJadwal = [];
 let idleTimer;
