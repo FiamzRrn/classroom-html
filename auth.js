@@ -1,4 +1,4 @@
-const API_URL = "http://localhost/tugas_kelompok/api.php";
+const API_URL = "http://backend-fikri.ct.ws/api.php";
 
 document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('themeTI') || 'dark';
