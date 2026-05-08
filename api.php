@@ -1,9 +1,19 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS, DELETE");
 header("Content-Type: application/json; charset=UTF-8");
 
-$conn = new mysqli("localhost", "root", "", "db_jadwal_ti");
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    exit(0);
+}
+
+$host = "sql300.infinityfree.com";
+$user = "if0_41863618";
+$pass = "eBak3FfK26N5";
+$db   = "if0_41863618_db_jadwal_ti";
+
+$conn = new mysqli($host, $user, $pass, $db);
 
 if ($conn->connect_error) {
     echo json_encode(["status" => "error", "message" => "Gagal konek ke MySQL: " . $conn->connect_error]);
